@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  service: one
+  notes: MyString
+  active: false
+
+two:
+  user: two
+  service: two
+  notes: MyString
+  active: false
