@@ -6,14 +6,33 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+def randomness
+  rand(-0.02..0.02)
+end
 
-User.create(email: 'paguiar32@gmail.com', name: 'Pedro Aguiar', latitude: 48.858202, longitude: 2.294270)
-User.create(email: 'pau.ferretiz@gmail.com', name: 'Paulina Ferretiz', latitude: 48.838202, longitude: 2.284270)
+def random_lat
+  48.858202 + randomness
+end
+
+def random_long
+  2.294270 + randomness
+end
+
+User.create(email: 'paguiar32@gmail.com', name: 'Pedro Aguiar', latitude: random_lat, longitude: random_long)
+User.create(email: 'pau.ferretiz@gmail.com', name: 'Paulina Ferretiz', latitude: random_lat, longitude: random_long)
+
+100.times do |i|
+  User.create(email: "bot-#{i}@gmail.com", name: "Bot #{i}", latitude: random_lat, longitude: random_long)
+end
 
 Service.create(name: 'Talk regularly', details: '')
 Service.create(name: 'Walk the dog', details: '')
 Service.create(name: 'Go get groceries', details: '')
 
-Proposal.create(user_id: User.find(2).id, service_id: Service.find(1).id, notes: '')
-
-Request.create(user_id: User.find(1).id, service_id: Service.find(2).id, notes: '')
+User.all.each do |user|
+  if rand() > 0.5
+    Proposal.create(user_id: user.id, service_id: rand(1..Service.all.size), notes: '')
+  else
+    Request.create(user_id: user.id, service_id: rand(1..Service.all.size), notes: '')
+  end
+end

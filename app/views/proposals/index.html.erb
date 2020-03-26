@@ -2,13 +2,37 @@
 
 <h1>Proposals</h1>
 
+<h2>Map</h2>
+<%
+map_center_lat = 0
+map_center_long = 0
+markers = []
+
+@proposals.each do |proposal|
+  markers << {
+    :latlng => [proposal.user.latitude, proposal.user.longitude],
+    :popup => link_to(proposal.service.name, proposal)
+  }
+  map_center_lat = map_center_lat + proposal.user.latitude / @proposals.size
+  map_center_long = map_center_long + proposal.user.longitude / @proposals.size
+end
+%>
+
+<%= map(
+  :center => {
+    :latlng => [map_center_lat, map_center_long],
+    :zoom => 14
+  },
+  :markers => markers) %>
+
+<h2>List</h2>
+
 <table>
   <thead>
     <tr>
       <th>User</th>
       <th>Service</th>
       <th>Notes</th>
-      <th>Active</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,10 +40,9 @@
   <tbody>
     <% @proposals.each do |proposal| %>
       <tr>
-        <td><%= proposal.user %></td>
-        <td><%= proposal.service %></td>
+        <td><%= link_to proposal.user.name, user_path(proposal.user) %></td>
+        <td><%= link_to proposal.service.name, service_path(proposal.service) %></td>
         <td><%= proposal.notes %></td>
-        <td><%= proposal.active %></td>
         <td><%= link_to 'Show', proposal %></td>
         <td><%= link_to 'Edit', edit_proposal_path(proposal) %></td>
         <td><%= link_to 'Destroy', proposal, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -2,13 +2,37 @@
 
 <h1>Requests</h1>
 
+<h2>Map</h2>
+<%
+map_center_lat = 0
+map_center_long = 0
+markers = []
+
+@requests.each do |request|
+  markers << {
+    :latlng => [request.user.latitude, request.user.longitude],
+    :popup => link_to(request.service.name, request)
+  }
+  map_center_lat = map_center_lat + request.user.latitude / @requests.size
+  map_center_long = map_center_long + request.user.longitude / @requests.size
+end
+%>
+
+<%= map(
+  :center => {
+    :latlng => [map_center_lat, map_center_long],
+    :zoom => 14
+  },
+  :markers => markers) %>
+
+<h2>List</h2>
+
 <table>
   <thead>
     <tr>
       <th>User</th>
       <th>Service</th>
       <th>Notes</th>
-      <th>Active</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,10 +40,9 @@
   <tbody>
     <% @requests.each do |request| %>
       <tr>
-        <td><%= request.user %></td>
-        <td><%= request.service %></td>
+        <td><%= link_to request.user.name, user_path(request.user) %></td>
+        <td><%= link_to request.service.name, service_path(request.service) %></td>
         <td><%= request.notes %></td>
-        <td><%= request.active %></td>
         <td><%= link_to 'Show', request %></td>
         <td><%= link_to 'Edit', edit_request_path(request) %></td>
         <td><%= link_to 'Destroy', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>

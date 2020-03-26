@@ -2,6 +2,30 @@
 
 <h1>Users</h1>
 
+<h2>Map</h2>
+<%
+map_center_lat = 0
+map_center_long = 0
+markers = []
+
+@users.each do |user|
+  markers << {
+    :latlng => [user.latitude, user.longitude],
+    :popup => link_to(user.name, user)
+  }
+  map_center_lat = map_center_lat + user.latitude / @users.size
+  map_center_long = map_center_long + user.longitude / @users.size
+end
+%>
+
+<%= map(
+  :center => {
+    :latlng => [map_center_lat, map_center_long],
+    :zoom => 14
+  },
+  :markers => markers) %>
+
+<h2>List</h2>
 <table>
   <thead>
     <tr>
