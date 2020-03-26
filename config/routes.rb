@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :proposals
   resources :users
   resources :services
   root 'pages#index'
