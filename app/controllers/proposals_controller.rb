@@ -1,5 +1,6 @@
 class ProposalsController < ApplicationController
   before_action :set_proposal, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :destroy, :create]
 
   # GET /proposals
   # GET /proposals.json
@@ -24,7 +25,7 @@ class ProposalsController < ApplicationController
   # POST /proposals
   # POST /proposals.json
   def create
-    @proposal = Proposal.new(proposal_params)
+    @proposal = current_user.proposals.build(proposal_params)
 
     respond_to do |format|
       if @proposal.save
