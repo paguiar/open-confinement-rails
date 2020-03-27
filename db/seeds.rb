@@ -18,11 +18,11 @@ def random_long
   2.294270 + randomness
 end
 
-User.create(email: 'paguiar32@gmail.com', name: 'Pedro Aguiar', latitude: random_lat, longitude: random_long)
-User.create(email: 'pau.ferretiz@gmail.com', name: 'Paulina Ferretiz', latitude: random_lat, longitude: random_long)
+User.create(email: 'paguiar32@gmail.com', password: 'password', password_confirmation: 'password', name: 'Pedro Aguiar', latitude: random_lat, longitude: random_long)
+User.create(email: 'pau.ferretiz@gmail.com', password: 'password', password_confirmation: 'password', name: 'Paulina Ferretiz', latitude: random_lat, longitude: random_long)
 
 100.times do |i|
-  User.create(email: "bot-#{i}@gmail.com", name: "Bot #{i}", latitude: random_lat, longitude: random_long)
+  User.create(email: "bot-#{i}@gmail.com", password: 'password', password_confirmation: 'password', name: "Bot #{i}", latitude: random_lat, longitude: random_long)
 end
 
 Service.create(name: 'Talk regularly', details: '')
