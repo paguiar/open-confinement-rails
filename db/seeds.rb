@@ -25,11 +25,15 @@ User.create(email: 'pau.ferretiz@gmail.com', password: 'password', password_conf
   User.create(email: "bot-#{i}@gmail.com", password: 'password', password_confirmation: 'password', name: "Bot #{i}", latitude: random_lat, longitude: random_long)
 end
 
-Service.create(name: 'Talk regularly', details: '')
-Service.create(name: 'Walk the dog', details: '')
-Service.create(name: 'Go get groceries', details: '')
+Service.create(name: 'Support for crisis management workers', details: 'Supporting public services, health staff, etc')
+Service.create(name: 'Remote IT or administrative support', details: '')
+Service.create(name: 'Remote homework support', details: 'For students taking remote courses')
+Service.create(name: 'Talking/conversation', details: '')
+Service.create(name: 'Buying essential food/products', details: '')
+Service.create(name: 'Solidarity acts', details: '')
+Service.create(name: 'Walking domestic animals', details: '')
 
-3.times do
+1.times do
   User.all.each do |user|
     if rand() > 0.5
       Proposal.create(user_id: user.id, service_id: rand(1..Service.all.size), notes: '')
