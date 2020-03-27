@@ -1,4 +1,5 @@
 <p id="notice"><%= notice %></p>
+<h1>User</h1>
 
 <p>
   <strong>Email:</strong>
@@ -29,6 +30,26 @@
   <strong>Longitude:</strong>
   <%= @user.longitude %>
 </p>
+
+<% unless @user.proposals.empty? %>
+  <h2>Proposals<h2>
+
+  <ul>
+    <% @user.proposals.each do |proposal| %>
+      <li><%= link_to proposal.service.name, proposal_path(proposal) %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% unless @user.requests.empty? %>
+  <h2>Requests<h2>
+
+  <ul>
+    <% @user.requests.each do |request| %>
+      <li><%= link_to request.service.name, request_path(request) %></li>
+    <% end %>
+  </ul>
+<% end %>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

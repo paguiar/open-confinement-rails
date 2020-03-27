@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
+<h1>Service</h1>
 
+<h2>Details</h2>
 <p>
   <strong>Name:</strong>
   <%= @service.name %>
@@ -9,6 +11,26 @@
   <strong>Details:</strong>
   <%= @service.details %>
 </p>
+
+<% unless @service.proposals.empty? %>
+  <h2>This service is proposed by the following users<h2>
+
+  <ul>
+    <% @service.proposals.each do |proposal| %>
+      <li><%= link_to "Proposed by user #{proposal.user.name}", proposal_path(proposal) %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% unless @service.requests.empty? %>
+  <h2>This server is requested by the following users<h2>
+
+  <ul>
+    <% @service.requests.each do |request| %>
+      <li><%= link_to "Requested by user #{request.user.name})", request_path(request) %></li>
+    <% end %>
+  </ul>
+<% end %>
 
 <%= link_to 'Edit', edit_service_path(@service) %> |
 <%= link_to 'Back', services_path %>

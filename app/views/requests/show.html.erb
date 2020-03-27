@@ -1,13 +1,14 @@
 <p id="notice"><%= notice %></p>
+<h1>Request</h1>
 
 <p>
   <strong>User:</strong>
-  <%= @request.user %>
+  <%= link_to @request.user.name, user_path(@request.user) %>
 </p>
 
 <p>
   <strong>Service:</strong>
-  <%= @request.service %>
+  <%= link_to @request.service.name, service_path(@request.service) %>
 </p>
 
 <p>

@@ -1,13 +1,14 @@
 <p id="notice"><%= notice %></p>
+<h1>Proposal</h1>
 
 <p>
   <strong>User:</strong>
-  <%= @proposal.user %>
+  <%= link_to @proposal.user.name, user_path(@proposal.user) %>
 </p>
 
 <p>
   <strong>Service:</strong>
-  <%= @proposal.service %>
+  <%= link_to @proposal.service.name, service_path(@proposal.service) %>
 </p>
 
 <p>

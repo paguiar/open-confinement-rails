@@ -29,10 +29,12 @@ Service.create(name: 'Talk regularly', details: '')
 Service.create(name: 'Walk the dog', details: '')
 Service.create(name: 'Go get groceries', details: '')
 
-User.all.each do |user|
-  if rand() > 0.5
-    Proposal.create(user_id: user.id, service_id: rand(1..Service.all.size), notes: '')
-  else
-    Request.create(user_id: user.id, service_id: rand(1..Service.all.size), notes: '')
+3.times do
+  User.all.each do |user|
+    if rand() > 0.5
+      Proposal.create(user_id: user.id, service_id: rand(1..Service.all.size), notes: '')
+    else
+      Request.create(user_id: user.id, service_id: rand(1..Service.all.size), notes: '')
+    end
   end
 end
