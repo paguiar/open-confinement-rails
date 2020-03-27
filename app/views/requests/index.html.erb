@@ -1,5 +1,8 @@
 <h1>Requests</h1>
 
+<p>This are the request for help issued by other people on this platform.</p>
+<p>If you can not help anybody in the list, please consider <%= link_to 'creating a help proposal', new_proposal_path %> so people can contact you in the future.
+
 <h2>Map</h2>
 <%
 map_center_lat = 0
@@ -9,7 +12,7 @@ markers = []
 @requests.each do |request|
   markers << {
     :latlng => [request.user.latitude, request.user.longitude],
-    :popup => link_to(request.service.name, request)
+    :popup => link_to("#{request.service.name} by #{request.user.name}", request)
   }
   map_center_lat = map_center_lat + request.user.latitude / @requests.size
   map_center_long = map_center_long + request.user.longitude / @requests.size
