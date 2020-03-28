@@ -1,37 +1,37 @@
-<h1>User</h1>
+<h1><%= "#{@user.class.model_name.human}" %></h1>
 
 <p>
-  <strong>Email:</strong>
+  <strong><%= "#{@user.class.human_attribute_name('email')}" %>:</strong>
   <%= @user.email %>
 </p>
 
 <p>
-  <strong>Name:</strong>
+  <strong><%= "#{@user.class.human_attribute_name('name')}" %>:</strong>
   <%= @user.name %>
 </p>
 
 <p>
-  <strong>Address:</strong>
+  <strong><%= "#{@user.class.human_attribute_name('address')}" %>:</strong>
   <%= @user.address %>
 </p>
 
 <p>
-  <strong>Phone:</strong>
+  <strong><%= "#{@user.class.human_attribute_name('phone')}" %>:</strong>
   <%= @user.phone %>
 </p>
 
 <p>
-  <strong>Latitude:</strong>
+  <strong><%= "#{@user.class.human_attribute_name('latitude')}" %>:</strong>
   <%= @user.latitude %>
 </p>
 
 <p>
-  <strong>Longitude:</strong>
+  <strong><%= "#{@user.class.human_attribute_name('longitude')}" %>:</strong>
   <%= @user.longitude %>
 </p>
 
 <% unless @user.proposals.empty? %>
-  <h2>Proposals<h2>
+  <h2><%= @user.proposals.klass.model_name.human %><h2>
 
   <ul>
     <% @user.proposals.each do |proposal| %>
@@ -41,7 +41,7 @@
 <% end %>
 
 <% unless @user.requests.empty? %>
-  <h2>Requests<h2>
+  <h2><%= @user.requests.klass.model_name.human %><h2>
 
   <ul>
     <% @user.requests.each do |request| %>
@@ -50,5 +50,6 @@
   </ul>
 <% end %>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= link_to I18n.t('actions.edit'), edit_user_path(@user) %>
+|
+<%= link_to I18n.t('actions.back'), users_path %>

@@ -1,35 +1,36 @@
-<h1>Service</h1>
+<h1><%= "#{@service.class.model_name.human}" %></h1>
 
-<h2>Details</h2>
+<h2><%= "#{I18n.t('views.common.details')}" %></h2>
 <p>
-  <strong>Name:</strong>
+  <strong><%= "#{@service.class.human_attribute_name('name')}" %>:</strong>
   <%= @service.name %>
 </p>
 
 <p>
-  <strong>Details:</strong>
+  <strong><%= "#{@service.class.human_attribute_name('details')}" %>:</strong>
   <%= @service.details %>
 </p>
 
 <% unless @service.proposals.empty? %>
-  <h2>This service is proposed by the following users<h2>
+  <h2><%= "#{I18n.t('views.services.show.proposals')}" %></h2>
 
   <ul>
     <% @service.proposals.each do |proposal| %>
-      <li><%= link_to "Proposed by user #{proposal.user.name}", proposal_path(proposal) %></li>
+      <li><%= link_to I18n.t('views.services.show.proposal', user: proposal.user.name), proposal_path(proposal) %></li>
     <% end %>
   </ul>
 <% end %>
 
 <% unless @service.requests.empty? %>
-  <h2>This server is requested by the following users<h2>
+  <h2><%= "#{I18n.t('views.services.show.requests')}" %></h2>
 
   <ul>
     <% @service.requests.each do |request| %>
-      <li><%= link_to "Requested by user #{request.user.name})", request_path(request) %></li>
+      <li><%= link_to I18n.t('views.services.show.request', user: request.user.name), request_path(request) %></li>
     <% end %>
   </ul>
 <% end %>
 
-<%= link_to 'Edit', edit_service_path(@service) %> |
-<%= link_to 'Back', services_path %>
+<%= link_to I18n.t('actions.edit'), edit_service_path(@service) %>
+|
+<%= link_to I18n.t('actions.back'), services_path %>

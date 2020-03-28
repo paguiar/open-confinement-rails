@@ -1,5 +1,5 @@
-<h1>New Service</h1>
+<h1><%= "#{I18n.t('actions.create')} #{@service.class.model_name.human}" %></h1>
 
 <%= render 'form', service: @service %>
 
-<%= link_to 'Back', services_path %>
+<%= link_to I18n.t('actions.back'), services_path %>

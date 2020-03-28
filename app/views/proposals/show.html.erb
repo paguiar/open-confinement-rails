@@ -1,24 +1,25 @@
-<h1>Proposal</h1>
+<h1><%= "#{@proposal.class.model_name.human}" %></h1>
 
 <p>
-  <strong>User:</strong>
+  <strong><%= "#{@proposal.class.human_attribute_name('user_id')}" %>:</strong>
   <%= link_to @proposal.user.name, user_path(@proposal.user) %>
 </p>
 
 <p>
-  <strong>Service:</strong>
+  <strong><%= "#{@proposal.class.human_attribute_name('service_id')}" %>:</strong>
   <%= link_to @proposal.service.name, service_path(@proposal.service) %>
 </p>
 
 <p>
-  <strong>Notes:</strong>
+  <strong><%= "#{@proposal.class.human_attribute_name('notes')}" %>:</strong>
   <%= @proposal.notes %>
 </p>
 
 <p>
-  <strong>Active:</strong>
+  <strong><%= "#{@proposal.class.human_attribute_name('active')}" %>:</strong>
   <%= @proposal.active %>
 </p>
 
-<%= link_to 'Edit', edit_proposal_path(@proposal) %> |
-<%= link_to 'Back', proposals_path %>
+<%= link_to I18n.t('actions.edit'), edit_proposal_path(@proposal) %>
+|
+<%= link_to I18n.t('actions.back'), proposals_path %>

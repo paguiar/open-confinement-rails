@@ -1,33 +1,69 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  platform_name: 'OpenConfinementRails'
+  activerecord:
+    models:
+      user: 'User'
+      service: 'Service'
+      proposal:
+        one: 'Proposal'
+        other: 'Proposals'
+      request:
+        one: 'Request'
+        other: 'Requests'
+      service:
+        one: 'Service'
+        other: 'Services'
+      user:
+        one: 'User'
+        other: 'Users'
+    attributes:
+      proposal:
+        user_id: 'User'
+        service_id: 'Service'
+        notes: 'Notes'
+        active: 'Active?'
+  views:
+    common:
+      map: 'Map'
+      list: 'List'
+      confirmation_prompt: 'Are you sure?'
+      details: 'Details'
+    layouts:
+      link_home: 'Home'
+      sign_up: 'Sign up'
+      sign_in: 'Sign in'
+      sign_out: 'Sign out'
+      signed_in: 'Signed in as %{user}'
+      edit: 'Edit account'
+    pages:
+      home:
+        welcome_header: 'Welcome to the %{platform_name} platform'
+        message_objective: 'This site''s purpose is to help people that need help connect with the volunteers that can provide it.'
+        message_question: 'Which category describes you better?'
+        action_propose: 'I want to help!'
+        action_request: 'I need help!'
+    proposals:
+      index:
+        introduction: 'This are the proposals made by other people on this platform.'
+        suggestion: 'If you do not find the assistance you need, be sure to register your request to be notified as soon as possible.'
+    requests:
+      index:
+        introduction: 'This are the request for help issued by other people on this platform.'
+        suggestion: 'If you can not help anybody in the list, please consider creating a help proposal so people can contact you in the future.'
+    services:
+      show:
+        proposals: 'This service is proposed by the following users'
+        proposal: 'Proposed by user %{user}'
+        requests: 'This service is requested by the following users'
+        request: 'Requested by user %{user}'
+
+  actions:
+    create: 'Create'
+    read: 'Read'
+    update: 'Update'
+    destroy: 'Destroy'
+    edit: 'Edit'
+    show: 'Show'
+    back: 'Back'
+    previous: 'Previous'
+    next: 'Next'
