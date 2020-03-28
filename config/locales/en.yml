@@ -13,6 +13,9 @@ en:
       service:
         one: 'Service'
         other: 'Services'
+      user:
+        one: 'User'
+        other: 'Users'
     attributes:
       proposal:
         user_id: 'User'
