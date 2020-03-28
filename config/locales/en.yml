@@ -7,7 +7,9 @@ en:
       proposal:
         one: 'Proposal'
         other: 'Proposals'
-      request: 'Request'
+      request:
+        one: 'Request'
+        other: 'Requests'
     attributes:
       proposal:
         user_id: 'User'
@@ -37,6 +39,10 @@ en:
       index:
         introduction: 'This are the proposals made by other people on this platform.'
         suggestion: 'If you do not find the assistance you need, be sure to register your request to be notified as soon as possible.'
+    requests:
+      index:
+        introduction: 'This are the request for help issued by other people on this platform.'
+        suggestion: 'If you can not help anybody in the list, please consider creating a help proposal so people can contact you in the future.'
   actions:
     create: 'Create'
     read: 'Read'
