@@ -1,10 +1,10 @@
-<h1>Services</h1>
+<h1><%= "#{@services.klass.model_name.human(count: 2)}" %></h1>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Details</th>
+      <th><%= "#{@services.klass.human_attribute_name('name')}" %></th>
+      <th><%= "#{@services.klass.human_attribute_name('details')}" %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,9 +14,9 @@
       <tr>
         <td><%= service.name %></td>
         <td><%= service.details %></td>
-        <td><%= link_to 'Show', service %></td>
-        <td><%= link_to 'Edit', edit_service_path(service) %></td>
-        <td><%= link_to 'Destroy', service, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to "#{I18n.t('actions.show')}", service %></td>
+        <td><%= link_to "#{I18n.t('actions.edit')}", edit_service_path(service) %></td>
+        <td><%= link_to "#{I18n.t('actions.destroy')}", service, method: :delete, data: { confirm: I18n.t('views.common.confirmation_prompt') } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +24,4 @@
 
 <br>
 
-<%= link_to 'New Service', new_service_path %>
+<%= link_to "#{I18n.t('actions.create')} #{@services.klass.model_name.human}", new_service_path %>
