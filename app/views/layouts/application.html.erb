@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>OpenConfinementRails5</title>
+    <title><%= I18n.translate('platform_name') %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -11,13 +11,19 @@
 
   <body>
     <div id="banner">
-      <%= link_to "Home", root_path %>
+      <%= link_to I18n.t('views.layouts.link_home'), root_path %>
     </div>
     <div id="session">
       <% if user_signed_in? %>
-        Signed in as <%= current_user.email %> | <%= link_to 'Edit account', edit_user_registration_path %> | <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
+        <%= I18n.t('views.layouts.signed_in', user: current_user.email) %>
+        |
+        <%= link_to I18n.t('views.layouts.edit'), edit_user_registration_path %>
+        |
+        <%= link_to(I18n.t('views.layouts.sign_out'), destroy_user_session_path, method: :delete) %>
       <% else %>
-        <%= link_to 'Sign up', new_user_registration_path %> | <%= link_to 'Sign in', new_user_session_path %>
+        <%= link_to I18n.t('views.layouts.sign_up'), new_user_registration_path %>
+        |
+        <%= link_to I18n.t('views.layouts.sign_in'), new_user_session_path %>
       <% end %>
     </div>
 

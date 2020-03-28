@@ -1,6 +1,7 @@
-<h1>Editing Proposal</h1>
+<h1><%= "#{I18n.t('actions.update')} #{@proposal.class.model_name.human}" %></h1>
 
 <%= render 'form', proposal: @proposal %>
 
-<%= link_to 'Show', @proposal %> |
-<%= link_to 'Back', proposals_path %>
+<%= link_to I18n.t('actions.show'), @proposal %>
+|
+<%= link_to I18n.t('actions.back'), proposals_path %>

@@ -1,9 +1,11 @@
-<h1>Proposals</h1>
+<h1><%= "#{@proposals.klass.model_name.human(count: 2)}" %></h1>
 
-<p>This are the proposals made by other people on this platform.</p>
-<p>If you do not find the assistance you need, be sure to <%= link_to 'register your request', new_request_path %> to be notified as soon as possible.
+<p><%= "#{I18n.t('views.proposals.index.introduction')}" %></p>
+<p><%= "#{I18n.t('views.proposals.index.suggestion')}" %></p>
 
-<h2>Map</h2>
+<%= link_to "#{I18n.t('actions.create')} #{@proposals.klass.model_name.human}", new_proposal_path %>
+
+<h2><%= "#{I18n.t('views.common.map')}" %></h2>
 <%
 map_center_lat = 0
 map_center_long = 0
@@ -26,14 +28,14 @@ end
   },
   :markers => markers) %>
 
-<h2>List</h2>
+<h2><%= "#{I18n.t('views.common.list')}" %></h2>
 
 <table>
   <thead>
     <tr>
-      <th>User</th>
-      <th>Service</th>
-      <th>Notes</th>
+      <th><%= "#{@proposals.klass.human_attribute_name('user_id')}" %></th>
+      <th><%= "#{@proposals.klass.human_attribute_name('service_id')}" %></th>
+      <th><%= "#{@proposals.klass.human_attribute_name('notes')}" %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -44,14 +46,10 @@ end
         <td><%= link_to proposal.user.name, user_path(proposal.user) %></td>
         <td><%= link_to proposal.service.name, service_path(proposal.service) %></td>
         <td><%= proposal.notes %></td>
-        <td><%= link_to 'Show', proposal %></td>
-        <td><%= link_to 'Edit', edit_proposal_path(proposal) %></td>
-        <td><%= link_to 'Destroy', proposal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to "#{I18n.t('actions.show')}", proposal %></td>
+        <td><%= link_to "#{I18n.t('actions.edit')}", edit_proposal_path(proposal) %></td>
+        <td><%= link_to "#{I18n.t('actions.destroy')}", proposal, method: :delete, data: { confirm: I18n.t('views.common.confirmation_prompt') } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Proposal', new_proposal_path %>
