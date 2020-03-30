@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class ProposalsControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
   setup do
     @proposal = proposals(:one)
   end
@@ -10,12 +12,19 @@ class ProposalsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get new" do
+  test "new when logged in should get success" do
+    sign_in users(:one)
     get new_proposal_url
     assert_response :success
   end
 
-  test "should create proposal" do
+  test "new when not logged in should get redirect" do
+    get new_proposal_url
+    assert_response :redirect
+  end
+
+  test "create when logged in should increase count" do
+    sign_in users(:one)
     assert_difference('Proposal.count') do
       post proposals_url, params: { proposal: { active: @proposal.active, notes: @proposal.notes, service_id: @proposal.service_id, user_id: @proposal.user_id } }
     end
@@ -38,11 +47,13 @@ class ProposalsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to proposal_url(@proposal)
   end
 
-  test "should destroy proposal" do
+  test "destroy when logged in should decrease count" do
+    sign_in users(:one)
     assert_difference('Proposal.count', -1) do
       delete proposal_url(@proposal)
     end
 
     assert_redirected_to proposals_url
   end
+
 end

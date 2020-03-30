@@ -1,8 +1,10 @@
 require 'test_helper'
 
 class RequestsControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
   setup do
-    @request = requests(:one)
+    @request_obj = requests(:one)
   end
 
   test "should get index" do
@@ -10,37 +12,45 @@ class RequestsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get new" do
+  test "new when logged in should get success" do
+    sign_in users(:one)
     get new_request_url
     assert_response :success
   end
 
-  test "should create request" do
+  test "new when not logged in should get redirect" do
+    get new_request_url
+    assert_response :redirect
+  end
+
+  test "create when logged in should increase count" do
+    sign_in users(:one)
     assert_difference('Request.count') do
-      post requests_url, params: { request: { active: @request.active, notes: @request.notes, service_id: @request.service_id, user_id: @request.user_id } }
+      post requests_url, params: { request: { active: @request_obj.active, notes: @request_obj.notes, service_id: @request_obj.service_id, user_id: @request_obj.user_id } }
     end
 
     assert_redirected_to request_url(Request.last)
   end
 
   test "should show request" do
-    get request_url(@request)
+    get request_url(@request_obj)
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_request_url(@request)
+    get edit_request_url(@request_obj)
     assert_response :success
   end
 
   test "should update request" do
-    patch request_url(@request), params: { request: { active: @request.active, notes: @request.notes, service_id: @request.service_id, user_id: @request.user_id } }
-    assert_redirected_to request_url(@request)
+    patch request_url(@request_obj), params: { request: { active: @request_obj.active, notes: @request_obj.notes, service_id: @request_obj.service_id, user_id: @request_obj.user_id } }
+    assert_redirected_to request_url(@request_obj)
   end
 
-  test "should destroy request" do
+  test "destroy when logged in should decrease count" do
+    sign_in users(:one)
     assert_difference('Request.count', -1) do
-      delete request_url(@request)
+      delete request_url(@request_obj)
     end
 
     assert_redirected_to requests_url
