@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  details: MyString
+  name: Support for crisis management workers
+  details: Supporting public services, health staff, etc
 
 two:
-  name: MyString
-  details: MyString
+  name: Remote homework support
+  details: For students taking remote courses

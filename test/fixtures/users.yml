@@ -2,16 +2,15 @@
 
 one:
   email: bot1@somewhere.org
-  name: MyString
-  address: MyString
-  phone: MyString
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  name: 'Bot 1'
+  address: 'Bot''s 1 address'
   latitude: 1.5
   longitude: 1.5
 
 two:
   email: bot2@somewhere.org
-  name: MyString
-  address: MyString
-  phone: MyString
+  name: 'Bot 2'
+  address: 'Bot''s 2 address'
   latitude: 1.5
   longitude: 1.5

@@ -11,13 +11,13 @@ class ProposalsTest < ApplicationSystemTestCase
   end
 
   test "creating a Proposal" do
+    sign_in_as_first_user
     visit proposals_url
-    click_on "New Proposal"
+    click_on "Create Proposal"
 
     check "Active" if @proposal.active
     fill_in "Notes", with: @proposal.notes
-    fill_in "Service", with: @proposal.service_id
-    fill_in "User", with: @proposal.user_id
+    select @proposal.service.name, from: 'Service'
     click_on "Create Proposal"
 
     assert_text "Proposal was successfully created"
@@ -25,13 +25,14 @@ class ProposalsTest < ApplicationSystemTestCase
   end
 
   test "updating a Proposal" do
+    sign_in_as_first_user
+
     visit proposals_url
-    click_on "Edit", match: :first
+    find(:xpath, './/tbody').click_link("Edit", match: :first)
 
     check "Active" if @proposal.active
     fill_in "Notes", with: @proposal.notes
-    fill_in "Service", with: @proposal.service_id
-    fill_in "User", with: @proposal.user_id
+    select @proposal.service.name, from: 'Service'
     click_on "Update Proposal"
 
     assert_text "Proposal was successfully updated"
@@ -39,6 +40,7 @@ class ProposalsTest < ApplicationSystemTestCase
   end
 
   test "destroying a Proposal" do
+    sign_in_as_first_user
     visit proposals_url
     page.accept_confirm do
       click_on "Destroy", match: :first

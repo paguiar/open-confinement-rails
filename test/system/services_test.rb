@@ -12,7 +12,7 @@ class ServicesTest < ApplicationSystemTestCase
 
   test "creating a Service" do
     visit services_url
-    click_on "New Service"
+    click_on "Create Service"
 
     fill_in "Details", with: @service.details
     fill_in "Name", with: @service.name

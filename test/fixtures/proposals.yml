@@ -3,11 +3,11 @@
 one:
   user: one
   service: one
-  notes: MyString
+  notes: 'Service 1, user 1'
   active: false
 
 two:
   user: two
   service: two
-  notes: MyString
+  notes: 'Service 2, user 2'
   active: false

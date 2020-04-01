@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 class RequestsTest < ApplicationSystemTestCase
   setup do
-    @request = requests(:one)
+    @request_obj = requests(:one)
   end
 
   test "visiting the index" do
@@ -11,13 +11,13 @@ class RequestsTest < ApplicationSystemTestCase
   end
 
   test "creating a Request" do
+    sign_in_as_first_user
     visit requests_url
-    click_on "New Request"
+    click_on "Create Request"
 
-    check "Active" if @request.active
-    fill_in "Notes", with: @request.notes
-    fill_in "Service", with: @request.service_id
-    fill_in "User", with: @request.user_id
+    check "Active" if @request_obj.active
+    fill_in "Notes", with: @request_obj.notes
+    select @request_obj.service.name, from: 'Service'
     click_on "Create Request"
 
     assert_text "Request was successfully created"
@@ -25,13 +25,14 @@ class RequestsTest < ApplicationSystemTestCase
   end
 
   test "updating a Request" do
-    visit requests_url
-    click_on "Edit", match: :first
+    sign_in_as_first_user
 
-    check "Active" if @request.active
-    fill_in "Notes", with: @request.notes
-    fill_in "Service", with: @request.service_id
-    fill_in "User", with: @request.user_id
+    visit requests_url
+    find(:xpath, './/tbody').click_link("Edit", match: :first)
+
+    check "Active" if @request_obj.active
+    fill_in "Notes", with: @request_obj.notes
+    select @request_obj.service.name, from: 'Service'
     click_on "Update Request"
 
     assert_text "Request was successfully updated"
@@ -39,6 +40,7 @@ class RequestsTest < ApplicationSystemTestCase
   end
 
   test "destroying a Request" do
+    sign_in_as_first_user
     visit requests_url
     page.accept_confirm do
       click_on "Destroy", match: :first

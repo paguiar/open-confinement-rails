@@ -5,7 +5,17 @@ class UsersTest < ApplicationSystemTestCase
     @user = users(:one)
   end
 
+  def sign_in_as_first_user
+    visit new_user_session_path
+    fill_in "Email", with: @user.email
+    fill_in "Password", with: 'password'
+    click_on "Log in"
+    assert_selector "p", text: "Signed in successfully."
+  end
+
   test "visiting the index" do
+    sign_in_as_first_user
+
     visit users_url
     assert_selector "h1", text: "Users"
   end
